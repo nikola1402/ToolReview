@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">Tool Review</p>
+                <div class="list-group">
+                    <li class="list-group-item">Info 1</li>
+                    <li class="list-group-item">Info 1</li>
+                    <li class="list-group-item">Info 1</li>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="<%= tool.image %>" alt="">
+                    <div class="caption-full">
+                        <h4 class="pull-right">
+                            <%= tool.price %>
+                        </h4>
+                        <h1>
+                            <a href="">
+                                <%= tool.name %>
+                            </a>
+                        </h1>
+                        <p>
+                            <%= tool.description %>
+                        </p>
+                        <p><em>Submitted by</em>
+                            <%= tool.author.username %>
+                        </p>
+                        <% if(currentUser && tool.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-warning" href="/tools/<%= tool._id%>/edit">Edit</a>
+                            <form class="deleteForm" action="/tools/<%= tool._id %>?_method=DELETE" method="post">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                            <% } %>
+                    </div>
+                </div>
+                <div class="well">
+                    <div class="text-right">
+                        <a class="btn btn-success" href="/tools/<%= tool._id %>/comments/new">Add New Comment</a>
+                    </div>
+                    <hr>
+                    <% tool.comments.forEach(function(comment){ %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong>
+                                    <%= comment.author.username %>
+                                </strong>
+                                <span class="pull-right">10 days ago</span>
+                                <p>
+                                    <%= comment.text %>
+                                </p>
+                                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                    <a class="btn btn-xs btn-warning" href="/tools/<%= tool._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                                    <form class="deleteForm" action="/tools/<%= tool._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+                                        <button class="btn btn-xs btn-danger">Delete</button>
+                                    </form>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <p>
+
+    </p>
+
+
+
+
+    <% include ../partials/footer %>

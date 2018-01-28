@@ -1,0 +1,34 @@
+<% include ../partials/header %>
+    <div class="container">
+        <header class="jumbotron">
+            <div class="container">
+                <h1>Welcome to ToolReview</h1>
+                <p>View our hand-picked tools and help us review them!</p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="/tools/new">Add New Tool</a>
+                </p>
+            </div>
+        </header>
+
+        <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+            <% tools.forEach(function(tool){ %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                        <img src="<%= tool.image %>" alt="">
+                        <div class="caption">
+                            <h4>
+                                <%= tool.name %>
+                            </h4>
+                            <p>
+                                <a href="/tools/<%= tool._id %>" class="btn btn-primary">More Info</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+
+        </div>
+
+    </div>
+
+    <% include ../partials/footer %>
